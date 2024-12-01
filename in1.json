@@ -1,0 +1,224 @@
+{
+    "modul": [
+        {
+            "name" : "CathodeCtr",
+            "git": [ 
+                { 
+                    "url": "",
+                    "hash": "xxxx",
+                    "msg": ""
+                }
+            ],
+            "script": [
+                { 
+                    "name": "sc",
+                    "time":"",
+                    "git": [ 
+                        { 
+                            "url": "",
+                            "hash": "xxxx",
+                            "msg": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "inports": [
+            {
+                "inport": "AcH_SMo"
+            },
+            {
+                "inport": "aFYpct_PGV_FcN_DRVopn_en"
+            },
+            {
+                "inport": "Amf_min_SU_H2Dil_T"
+            }
+        ],
+    "outports": [
+        {
+            "outport": "aFYopn_DRV"
+        },
+        {
+            "outport": "FP_Drain_done_T"
+        },
+        {
+            "outport": "FP_Cycles_done_T"
+        },
+        {
+            "outport": "SDA_Drain_done_T"
+        },
+        {
+            "outport": "SDA_Cycles_done_T"
+        },
+        {
+            "outport": "aFYpct_DRV"
+        },
+        {
+            "outport": "WL_AKO_filt"
+        }
+    ],
+    "lp":[
+    {
+        "Local_Parameters": "fcu_Amf_WICo_DRV_en_dlyT_P"
+    },
+    {
+        "Local_Parameters": "fcu_Amf_WICo_min_DRV_en_P"
+    },
+    {
+        "Local_Parameters": "fcu_FYopn_DRV_en_SP_P"
+    },
+    {
+        "Local_Parameters": "fcu_Fp_Si_min_DRV_en_barg_P"
+    },
+    {
+        "Local_Parameters": "fcu_aAMn_ETC_SM_P2"
+    },
+    {
+        "Local_Parameters": "fcu_aAMn_ETC_SM_P4"
+    },
+    {
+        "Local_Parameters": "fcu_V_AKO_ctrlKp_SimP"
+    },
+    {
+        "Local_Parameters": "fcu_V_AKO_ctrlTn_SimP"
+    },
+    {
+        "Local_Parameters": "fcu_V_H2Ol_AKO_req_SimP"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_full_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_min_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_max_P"
+    },
+    {
+        "Local_Parameters": "fcu_AcH_SMo_aFYcls_open_Loop_en_S"
+    },
+    {
+        "Local_Parameters": "fcu_AcH_SMo_aFYcls_open_Loop_en_S1"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_full_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_max_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_min_P"
+    },
+    {
+        "Local_Parameters": "fcu_DRV_openLoop_en_S"
+    },
+    {
+        "Local_Parameters": "fcu_DRV_openLoop_en_V"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_max_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_max_fact_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_max_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_min_P"
+    },
+    {
+        "Local_Parameters": "fcu_WL_AKO_toffT_P"
+    },
+    {
+        "Local_Parameters": "fcu_WL_AKO_tonT_P"
+    },
+    {
+        "Local_Parameters": "fcu_CT_Si_mH2O_S_T1_P"
+    },
+    {
+        "Local_Parameters": "fcu_DRV_openLoop_kv_fac_P"
+    },
+    {
+        "Local_Parameters": "fcu_kv_DRV_H2O_L_P"
+    },
+    {
+        "Local_Parameters": "fcu_AKO_LvlCtrl_high_en_P"
+    },
+    {
+        "Local_Parameters": "fcu_CT_Si_mH2O_S_T1_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_full_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_min_P"
+    },
+    {
+        "Local_Parameters": "fcu_kv_DRV_H2O_L_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_max_P"
+    },
+    {
+        "Local_Parameters": "fcu_Wm_AKO_min_P"
+    },
+    {
+        "Local_Parameters": "fcu_FP_AKO_DRV_cycles_P"
+    },
+    {
+        "Local_Parameters": "fcu_FP_AKO_empty_DRV_cycles_P"
+    },
+    {
+        "Local_Parameters": "fcu_Fp_Si_FP_Drain_done_P"
+    },
+    {
+        "Local_Parameters": "fcu_dFp_Si_dt_AKO_empty_P"
+    },
+    {
+        "Local_Parameters": "fcu_Fp_Si_FP_Drain_done_P"
+    },
+    {
+        "Local_Parameters": "fcu_SDA_AKO_empty_DRV_cycles_P"
+    },
+    {
+        "Local_Parameters": "fcu_SDA_DRV_cycles_P"
+    },
+    {
+        "Local_Parameters": "fcu_dFp_Si_dt_AKO_empty_P"
+    },
+    {
+        "Local_Parameters": "fcu_V_H2Ol_AKO_en_SimP"
+    },
+    {
+        "Local_Parameters": "fcu_WL_AKO_avail_P"
+    },
+    {
+        "Local_Parameters": "fcu_aFY_DRV_PWM_duty_SD_P"
+    },
+    {
+        "Local_Parameters": "fcu_aFY_DRV_PWM_period_SD_P"
+    },
+    {
+        "Local_Parameters": "fcu_aFYopn_DRV_S"
+    },
+    {
+        "Local_Parameters": "fcu_aFYopn_DRV_V"
+    },
+    {
+        "Local_Parameters": "fcu_aFYpct_DRV_S"
+    },
+    {
+        "Local_Parameters": "fcu_aFYpct_DRV_V"
+    }
+    ],
+    "glp":[
+        {
+            "Global_Parameters": "R_fcu_ARpos_CBV_open_P"
+        },
+        {
+            "Global_Parameters": "R_fcu_aAMn_ETC_SD_Anode_P"
+        }
+    ]
+}
