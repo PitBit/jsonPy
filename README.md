@@ -1,2 +1,3 @@
 # jsonPy
-python Script to read, write
+
+target: python Script to read, write and compare json specific files
