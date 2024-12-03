@@ -2,26 +2,36 @@
 
 import json
 
-# Opening JSON file
+# Open first JSON file and returns JSON object as a dictionary
 fileOne = open('in1.json')
-
-# returns JSON object as a dictionary
-data = json.load(fileOne)
+fileOneData = json.load(fileOne)
 fileOne.close()
 
-#read second file to compare
+# Open second JSON file and returns JSON object as a dictionary
 fileTwo = open('in2.json')
 fileTwoData = json.load(fileTwo)
 fileTwo.close()
 
-# Iterating through the json list
-count = 0
-for i in data['inports']:
-    print(data['inports'][count]['inport'])
-    count = count + 1
-print('----------------------------')
-count = 0
-for i in data['outports']:
-    print(data['outports'][count]['outport'])
-    count = count+1
+# check json classes in data
+if 'RequirePorts' in fileOneData:
+    counter = 0
+    findingsCnt = 0
+    print('--R-Ports--file-1-----------------------')
+    for i in fileOneData['RequirePorts']:
+        if 'RequirePort' in fileOneData['RequirePorts'][counter]:
+            print(fileOneData['RequirePorts'][counter]['RequirePort'])
+        else:
+            print('-- WARNING: key RequirePort not found, wrong scruct?')
+        counter += 1
+else:
+    print('-- no Require Ports find')
+if 'ProvidePorts' in fileOneData:
+    counter = 0
+    print('--R-Ports--file-2-----------------------')
+    for i in fileOneData['RequirePorts']:
+        if 'RequirePort' in fileOneData['RequirePorts'][counter]:
+            print(fileOneData['RequirePorts'][counter]['RequirePort'])
+        else:
+            print('-- WARNING: key ProvidePort not found, wrong scruct?')
+        counter = counter + 1
 print('----------------------------')
