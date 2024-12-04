@@ -38,26 +38,31 @@ if 'RequirePorts' in fileOneData:
     KeyCnt1 = 0
     KeyCnt2 = 0
     findingsCnt = 0
-    print('--R-Ports-------------------------')
+    print('--R-Ports--------------------------------------------------------------------------------------')
     for i in DataFirst:
         if KeySecond in DataFirst[KeyCnt1]:
-            print('A',KeyCnt1, '  ', DataFirst[KeyCnt1][KeySecond])#, end=' ')
+            #print('A',KeyCnt1, '  ', end=' ')
+            print(DataFirst[KeyCnt1][KeySecond], end=' ')
             for SecondDataCnt in DataSecond:
                 if KeySecond in DataSecond[KeyCnt2]:
-                    print('    B',KeyCnt2,end=' ' )
+                    #print('    B',KeyCnt2,end=' ' )
                     if DataFirst[KeyCnt1][KeySecond] == DataSecond[KeyCnt2][KeySecond]:
-                        print('-> found')
+                        #print('-> found')
                         findingsCnt+=1
                     elif DataFirst[KeyCnt1][KeySecond].lower() == DataSecond[KeyCnt2][KeySecond].lower():
                         print('-> found, but not case sensitiv', DataSecond[KeyCnt2][KeySecond])
                         findingsCnt+=1
-                    else:
-                        print('-> not found')
+                    # else:
+                    #     print('-> not found')
                 KeyCnt2+=1
             KeyCnt2=0
             if findingsCnt == 0:
                 #newIf[]
-                print('new interface', DataFirst[KeyCnt1][KeySecond])
+                print('new interface or case sensitiv ', DataFirst[KeyCnt1][KeySecond])
+            elif findingsCnt > 1:
+                print('-> zwei mal gefunden')
+            else:
+                print(' -> found')
             findingsCnt=0
         else:
             print('-- WARNING: key RequirePort not found, wrong scruct?')
@@ -65,4 +70,43 @@ if 'RequirePorts' in fileOneData:
 else:
     print('-- no ', KeySecond, ' find')
 KeyCnt1 = 0
-print('----------------------------')
+print(' ')
+print('-----------------------------------------------------------------------------------------------')
+#EOF
+
+def compareKeys(Data, key1, key2):
+    if 'RequirePorts' in fileOneData:
+        KeyCnt1 = 0
+        KeyCnt2 = 0
+        findingsCnt = 0
+        print('--R-Ports--------------------------------------------------------------------------------------')
+        for i in DataFirst:
+            if KeySecond in DataFirst[KeyCnt1]:
+                #print('A',KeyCnt1, '  ', end=' ')
+                print(DataFirst[KeyCnt1][KeySecond], end=' ')
+                for SecondDataCnt in DataSecond:
+                    if KeySecond in DataSecond[KeyCnt2]:
+                        #print('    B',KeyCnt2,end=' ' )
+                        if DataFirst[KeyCnt1][KeySecond] == DataSecond[KeyCnt2][KeySecond]:
+                            #print('-> found')
+                            findingsCnt+=1
+                        elif DataFirst[KeyCnt1][KeySecond].lower() == DataSecond[KeyCnt2][KeySecond].lower():
+                            print('-> found, but not case sensitiv', DataSecond[KeyCnt2][KeySecond])
+                            findingsCnt+=1
+                        # else:
+                        #     print('-> not found')
+                    KeyCnt2+=1
+                KeyCnt2=0
+                if findingsCnt == 0:
+                    #newIf[]
+                    print('new interface or case sensitiv ', DataFirst[KeyCnt1][KeySecond])
+                elif findingsCnt > 1:
+                    print('-> zwei mal gefunden')
+                else:
+                    print(' -> found')
+                findingsCnt=0
+            else:
+                print('-- WARNING: key RequirePort not found, wrong scruct?')
+            KeyCnt1 += 1
+    else:
+        print('-- no ', KeySecond, ' find')
