@@ -6,18 +6,25 @@ import json
 
 # get commad line arguments
 print(sys.argv)
+if len(sys.argv) > 1:
+    fileOneName = sys.argv[1]+'.json'
+    fileTwoName = sys.argv[1]+'_lib.json'
+    print(fileOneName, fileTwoName)
+else:
+    fileOneName = 'in1.json'
+    fileTwoName = 'in2.json'
 
 # define dict for results
 result={"Modul":""}, {"key":"test"}
 
 # Open first JSON file and returns JSON object as a dictionary
 # it want to be master file
-fileOne = open('in2.json')
+fileOne = open(fileOneName)
 fileOneData = json.load(fileOne)
 fileOne.close()
 
 # Open second JSON file and returns JSON object as a dictionary
-fileTwo = open('in1.json')
+fileTwo = open(fileTwoName)
 fileTwoData = json.load(fileTwo)
 fileTwo.close()
 
