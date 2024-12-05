@@ -33,6 +33,12 @@
             },
             {
                 "RequirePort": "Amf_min_SU_H2Dil_T"
+            },
+            {
+                "RequirePort": "Amf_min_SU_H2Dil_T"
+            },
+            {
+                "RequirePort": "MyNiceTest"
             }
         ],
     "ProvidePorts": [
@@ -117,12 +123,12 @@
         "CalibrationParameter": "fcu_DRV_openLoop_en_V"
     }
     ],
-    "ParameteRequirePorts":[
+    "ParameterRequirePorts":[
         {
-            "ParameteRequirePort": "R_fcu_ARpos_CBV_open_P"
+            "ParameterRequirePort": "R_fcu_ARpos_CBV_open_P"
         },
         {
-            "ParameteRequirePort": "R_fcu_aAMn_ETC_SD_Anode_P"
+            "ParameterRequirePort": "R_fcu_aAMn_ETC_SD_Anode_P"
         }
     ]
 }

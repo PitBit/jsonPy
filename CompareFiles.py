@@ -7,106 +7,113 @@ import json
 # get commad line arguments
 print(sys.argv)
 
+# define dict for results
+result={"Modul":""}, {"key":"test"}
+
 # Open first JSON file and returns JSON object as a dictionary
-fileOne = open('in1.json')
+# it want to be master file
+fileOne = open('in2.json')
 fileOneData = json.load(fileOne)
 fileOne.close()
 
 # Open second JSON file and returns JSON object as a dictionary
-fileTwo = open('in2.json')
+fileTwo = open('in1.json')
 fileTwoData = json.load(fileTwo)
 fileTwo.close()
+
+print('\n-------------------------------------------------------------------------------------------------')
+def compareKeys(key):
+    KeyCnt1 = 0
+    KeyCnt2 = 0
+    findingsCnt = 0
+    print('--',key,'-compare--------------------------------------------------------------------------')
+    while KeyCnt1 < len(DataFirst):
+        lastFind =''
+        # check for key in dict
+        if key in DataFirst[KeyCnt1]:
+            while KeyCnt2 < len(DataSecond):
+                # check for key in dict
+                if key in DataSecond[KeyCnt2]:
+                    # compare the names
+                    if DataFirst[KeyCnt1][key] == DataSecond[KeyCnt2][key]:
+                        findingsCnt+=1
+                        lastFind = DataFirst[KeyCnt1][key]
+                    elif DataFirst[KeyCnt1][key].lower() == DataSecond[KeyCnt2][key].lower():
+                        print('-> case sensitiv\n     ',DataFirst[KeyCnt1][key],' != ', DataSecond[KeyCnt2][key])
+                        findingsCnt+=1
+                KeyCnt2+=1
+            KeyCnt2=0
+            if findingsCnt == 0:
+                print('-> new interface: \n    ', DataFirst[KeyCnt1][key])
+            elif findingsCnt > 1:
+                print('-> double declaration, please check this: ', lastFind)
+            findingsCnt=0
+        else:
+            print('-- WARNING: key RequirePort not found, wrong scruct?')
+        KeyCnt1 += 1
+    KeyCnt1 = 0
+    KeyCnt2 = 0
+    findingsCnt = 0
+    print('-> deleted:')
+    while KeyCnt2 < len(DataSecond):
+        if key in DataSecond[KeyCnt2]:
+            while KeyCnt1 < len(DataFirst):
+                if DataFirst[KeyCnt1][key] != DataSecond[KeyCnt2][key]:
+                    if DataFirst[KeyCnt1][key].lower() != DataSecond[KeyCnt2][key].lower():
+                        findingsCnt+=1
+                KeyCnt1+=1
+            KeyCnt1 = 0
+            if findingsCnt == len(DataFirst):
+                print('    ', DataSecond[KeyCnt2][key])
+            findingsCnt = 0
+        KeyCnt2+=1
+    print('--',key,'-END------------------------------------------------------------------------------\n')
 
 # define the data keys
 Keyfirst = 'RequirePorts'
 KeySecond = 'RequirePort'
 
-fileOneDataLen = len(fileOneData[Keyfirst])
-fileTwoDataLen = len(fileTwoData[Keyfirst])
-print('len of fileOneData', fileOneDataLen, end=' '),
-print('but len of fileOneData', fileTwoDataLen)
+DataFirst = fileOneData[Keyfirst]
+DataSecond = fileTwoData[Keyfirst]
 
-# compare number of keys in both files
-if fileOneDataLen > fileTwoDataLen:
-    DataFirst = fileOneData[Keyfirst]
-    DataSecond = fileTwoData[Keyfirst]
+if Keyfirst in fileOneData:
+    compareKeys(KeySecond)
 else:
-    DataFirst = fileTwoData[Keyfirst]
-    DataSecond = fileOneData[Keyfirst]
+    print('-- no ', Keyfirst, ' find')
+
+# define the data keys
+Keyfirst = 'ProvidePorts'
+KeySecond = 'ProvidePort'
+
+DataFirst = fileOneData[Keyfirst]
+DataSecond = fileTwoData[Keyfirst]
+
+if Keyfirst in fileOneData:
+    compareKeys(KeySecond)
+else:
+    print('-- no ', Keyfirst, ' find')
+
+# define the data keys
+Keyfirst = 'CalibrationParameters'
+KeySecond = 'CalibrationParameter'
+
+DataFirst = fileOneData[Keyfirst]
+DataSecond = fileTwoData[Keyfirst]
+
+if Keyfirst in fileOneData:
+    compareKeys(KeySecond)
+else:
+    print('-- no ', Keyfirst, ' find')
     
-if 'RequirePorts' in fileOneData:
-    KeyCnt1 = 0
-    KeyCnt2 = 0
-    findingsCnt = 0
-    print('--R-Ports--------------------------------------------------------------------------------------')
-    for i in DataFirst:
-        if KeySecond in DataFirst[KeyCnt1]:
-            #print('A',KeyCnt1, '  ', end=' ')
-            print(DataFirst[KeyCnt1][KeySecond], end=' ')
-            for SecondDataCnt in DataSecond:
-                if KeySecond in DataSecond[KeyCnt2]:
-                    #print('    B',KeyCnt2,end=' ' )
-                    if DataFirst[KeyCnt1][KeySecond] == DataSecond[KeyCnt2][KeySecond]:
-                        #print('-> found')
-                        findingsCnt+=1
-                    elif DataFirst[KeyCnt1][KeySecond].lower() == DataSecond[KeyCnt2][KeySecond].lower():
-                        print('-> found, but not case sensitiv', DataSecond[KeyCnt2][KeySecond])
-                        findingsCnt+=1
-                    # else:
-                    #     print('-> not found')
-                KeyCnt2+=1
-            KeyCnt2=0
-            if findingsCnt == 0:
-                #newIf[]
-                print('new interface or case sensitiv ', DataFirst[KeyCnt1][KeySecond])
-            elif findingsCnt > 1:
-                print('-> zwei mal gefunden')
-            else:
-                print(' -> found')
-            findingsCnt=0
-        else:
-            print('-- WARNING: key RequirePort not found, wrong scruct?')
-        KeyCnt1 += 1
-else:
-    print('-- no ', KeySecond, ' find')
-KeyCnt1 = 0
-print(' ')
-print('-----------------------------------------------------------------------------------------------')
-#EOF
+# define the data keys
+Keyfirst = 'ParameterRequirePorts'
+KeySecond = 'ParameterRequirePort'
 
-def compareKeys(Data, key1, key2):
-    if 'RequirePorts' in fileOneData:
-        KeyCnt1 = 0
-        KeyCnt2 = 0
-        findingsCnt = 0
-        print('--R-Ports--------------------------------------------------------------------------------------')
-        for i in DataFirst:
-            if KeySecond in DataFirst[KeyCnt1]:
-                #print('A',KeyCnt1, '  ', end=' ')
-                print(DataFirst[KeyCnt1][KeySecond], end=' ')
-                for SecondDataCnt in DataSecond:
-                    if KeySecond in DataSecond[KeyCnt2]:
-                        #print('    B',KeyCnt2,end=' ' )
-                        if DataFirst[KeyCnt1][KeySecond] == DataSecond[KeyCnt2][KeySecond]:
-                            #print('-> found')
-                            findingsCnt+=1
-                        elif DataFirst[KeyCnt1][KeySecond].lower() == DataSecond[KeyCnt2][KeySecond].lower():
-                            print('-> found, but not case sensitiv', DataSecond[KeyCnt2][KeySecond])
-                            findingsCnt+=1
-                        # else:
-                        #     print('-> not found')
-                    KeyCnt2+=1
-                KeyCnt2=0
-                if findingsCnt == 0:
-                    #newIf[]
-                    print('new interface or case sensitiv ', DataFirst[KeyCnt1][KeySecond])
-                elif findingsCnt > 1:
-                    print('-> zwei mal gefunden')
-                else:
-                    print(' -> found')
-                findingsCnt=0
-            else:
-                print('-- WARNING: key RequirePort not found, wrong scruct?')
-            KeyCnt1 += 1
-    else:
-        print('-- no ', KeySecond, ' find')
+DataFirst = fileOneData[Keyfirst]
+DataSecond = fileTwoData[Keyfirst]
+
+if Keyfirst in fileOneData:
+    compareKeys(KeySecond)
+else:
+    print('-- no ', Keyfirst, ' find')
+    
