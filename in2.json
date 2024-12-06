@@ -1,4 +1,5 @@
 {
+    "Description" :"This file list all modul interfaces",
     "Modul": [
         {
             "name" : "CathodeCtr",
@@ -126,6 +127,9 @@
         },
         {
             "ParameterRequirePort": "R_fcu_aAMn_ETC_SD_Anode_P"
+        },
+        {
+            "ParameterRequirePort": "R_fcu_aAMn_ETC_SD_P"
         }
     ]
 }

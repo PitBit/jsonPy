@@ -5,10 +5,12 @@ import sys
 import json
 
 # get commad line arguments
-print(sys.argv)
 if len(sys.argv) > 1:
-    fileOneName = sys.argv[1]+'.json'
-    fileTwoName = sys.argv[1]+'_lib.json'
+    fileOneName = sys.argv[1]
+    if len(sys.argv)>2:
+        fileTwoName = sys.argv[2]
+    else:
+        fileTwoName = sys.argv[1]+'_lib.json'
     print(fileOneName, fileTwoName)
 else:
     fileOneName = 'in1.json'
@@ -29,6 +31,8 @@ fileTwoData = json.load(fileTwo)
 fileTwo.close()
 
 print('\n-------------------------------------------------------------------------------------------------')
+print(' Master File: ', fileOneName,' will be compare with old file: ', fileTwoName)
+
 def compareKeys(key):
     KeyCnt1 = 0
     KeyCnt2 = 0
@@ -46,14 +50,14 @@ def compareKeys(key):
                         findingsCnt+=1
                         lastFind = DataFirst[KeyCnt1][key]
                     elif DataFirst[KeyCnt1][key].lower() == DataSecond[KeyCnt2][key].lower():
-                        print('-> case sensitiv\n     ',DataFirst[KeyCnt1][key],' != ', DataSecond[KeyCnt2][key])
+                        print('    -> case sensitiv\n         ',DataFirst[KeyCnt1][key],' != ', DataSecond[KeyCnt2][key])
                         findingsCnt+=1
                 KeyCnt2+=1
             KeyCnt2=0
             if findingsCnt == 0:
-                print('-> new interface: \n    ', DataFirst[KeyCnt1][key])
+                print('    -> new interface: \n        ', DataFirst[KeyCnt1][key])
             elif findingsCnt > 1:
-                print('-> double declaration, please check this: ', lastFind)
+                print('    -> double declaration, please check this: ', lastFind)
             findingsCnt=0
         else:
             print('-- WARNING: key RequirePort not found, wrong scruct?')
@@ -61,7 +65,7 @@ def compareKeys(key):
     KeyCnt1 = 0
     KeyCnt2 = 0
     findingsCnt = 0
-    print('-> deleted:')
+    print('    -> deleted:')
     while KeyCnt2 < len(DataSecond):
         if key in DataSecond[KeyCnt2]:
             while KeyCnt1 < len(DataFirst):
@@ -71,7 +75,7 @@ def compareKeys(key):
                 KeyCnt1+=1
             KeyCnt1 = 0
             if findingsCnt == len(DataFirst):
-                print('    ', DataSecond[KeyCnt2][key])
+                print('        ', DataSecond[KeyCnt2][key])
             findingsCnt = 0
         KeyCnt2+=1
     print('--',key,'-END------------------------------------------------------------------------------\n')
