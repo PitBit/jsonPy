@@ -14,8 +14,8 @@ if len(sys.argv) > 1:
         fileTwoName = sys.argv[1]+'_lib.json'
     print(fileOneName, fileTwoName)
 else:
-    fileOneName = 'file1.json'
-    fileTwoName = 'file1_lib.json'
+    fileOneName = 'in1.json'
+    fileTwoName = 'in2.json'
 
 # define dict for results
 result={"Modul":""}, {"key":"test"}
@@ -55,7 +55,6 @@ def compareKeys(keyIn):
                             findingsCnt+=1
                         elif DataFirst[KeyCnt1][key].lower() == DataSecond[KeyCnt2][key].lower():
                             print('    -> case sensitiv\n         ',DataFirst[KeyCnt1][key],' != ', DataSecond[KeyCnt2][key])
-                            MsgCnt+=1
                             findingsCnt+=1
                     KeyCnt2+=1
                 KeyCnt2=0
@@ -87,7 +86,7 @@ def compareKeys(keyIn):
                     print('        ', DataSecond[KeyCnt2][key])
                 findingsCnt = 0
             KeyCnt2+=1
-        print('----', key,' done\n')
+        print('\n') #print('----', key,' done\n')
     else:
         print('----', keyIn, ' key not found!')
 #-----------------------------------------------------------------------------------------------------------
