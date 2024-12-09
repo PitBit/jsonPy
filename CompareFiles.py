@@ -1,5 +1,6 @@
 #!python
 # script to search same or not same string in json files
+# ToDo: print messages, only by changes!
 
 import sys
 import json
@@ -30,16 +31,17 @@ fileTwo = open(fileTwoName)
 fileTwoData = json.load(fileTwo)
 fileTwo.close()
 
-print('\n-------------------------------------------------------------------------------------------------')
-print(' Master File: ', fileOneName,' will be compare with old file: ', fileTwoName)
+print('\n--START------------------------------------------------------------------------------------------')
+print(' compare files: \n    -> ', fileOneName,'\n    -> ', fileTwoName, '\n\n')
 
 def compareKeys(key):
+    MsgCnt = 0
     KeyCnt1 = 0
     KeyCnt2 = 0
     findingsCnt = 0
-    print('--',key,'-compare--------------------------------------------------------------------------')
+    firstFinding = 0
+    print('----',key,': compare len master', len(DataFirst),' : len old', len(DataSecond),)
     while KeyCnt1 < len(DataFirst):
-        lastFind =''
         # check for key in dict
         if key in DataFirst[KeyCnt1]:
             while KeyCnt2 < len(DataSecond):
@@ -48,24 +50,27 @@ def compareKeys(key):
                     # compare the names
                     if DataFirst[KeyCnt1][key] == DataSecond[KeyCnt2][key]:
                         findingsCnt+=1
-                        lastFind = DataFirst[KeyCnt1][key]
                     elif DataFirst[KeyCnt1][key].lower() == DataSecond[KeyCnt2][key].lower():
                         print('    -> case sensitiv\n         ',DataFirst[KeyCnt1][key],' != ', DataSecond[KeyCnt2][key])
+                        MsgCnt+=1
                         findingsCnt+=1
                 KeyCnt2+=1
             KeyCnt2=0
             if findingsCnt == 0:
-                print('    -> new interface: \n        ', DataFirst[KeyCnt1][key])
-            elif findingsCnt > 1:
-                print('    -> double declaration, please check this: ', lastFind)
+                if firstFinding == 0:
+                    print('    -> new:')
+                    firstFinding=1
+                print('        ', DataFirst[KeyCnt1][key])
+                MsgCnt+=1
             findingsCnt=0
         else:
-            print('-- WARNING: key RequirePort not found, wrong scruct?')
+            print('-- WARNING: key ', key, ' not found, wrong scruct?')
         KeyCnt1 += 1
     KeyCnt1 = 0
     KeyCnt2 = 0
     findingsCnt = 0
-    print('    -> deleted:')
+    firstFinding = 0
+    # print('    -> deleted:')
     while KeyCnt2 < len(DataSecond):
         if key in DataSecond[KeyCnt2]:
             while KeyCnt1 < len(DataFirst):
@@ -75,56 +80,72 @@ def compareKeys(key):
                 KeyCnt1+=1
             KeyCnt1 = 0
             if findingsCnt == len(DataFirst):
+                if firstFinding == 0:
+                    print('    -> deleted:')
+                    firstFinding=1
                 print('        ', DataSecond[KeyCnt2][key])
+                MsgCnt+=1
             findingsCnt = 0
         KeyCnt2+=1
-    print('--',key,'-END------------------------------------------------------------------------------\n')
+    # if MsgCnt > 0:
+    #     print('\n', MsgCnt, '\n')
+    print('----',key,' done\n')
+#-----------------------------------------------------------------------------------------------------------
 
 # define the data keys
 Keyfirst = 'RequirePorts'
 KeySecond = 'RequirePort'
 
-DataFirst = fileOneData[Keyfirst]
-DataSecond = fileTwoData[Keyfirst]
-
 if Keyfirst in fileOneData:
+    DataFirst = fileOneData[Keyfirst]
+    DataSecond = fileTwoData[Keyfirst]
     compareKeys(KeySecond)
 else:
-    print('-- no ', Keyfirst, ' find')
+    print('--', Keyfirst, ' key not found!')
 
 # define the data keys
 Keyfirst = 'ProvidePorts'
 KeySecond = 'ProvidePort'
 
-DataFirst = fileOneData[Keyfirst]
-DataSecond = fileTwoData[Keyfirst]
-
 if Keyfirst in fileOneData:
+    DataFirst = fileOneData[Keyfirst]
+    DataSecond = fileTwoData[Keyfirst]
     compareKeys(KeySecond)
 else:
-    print('-- no ', Keyfirst, ' find')
+    print('--', Keyfirst, ' key not found!')
 
 # define the data keys
 Keyfirst = 'CalibrationParameters'
 KeySecond = 'CalibrationParameter'
 
-DataFirst = fileOneData[Keyfirst]
-DataSecond = fileTwoData[Keyfirst]
-
 if Keyfirst in fileOneData:
+    DataFirst = fileOneData[Keyfirst]
+    DataSecond = fileTwoData[Keyfirst]
     compareKeys(KeySecond)
 else:
-    print('-- no ', Keyfirst, ' find')
+    print('--', Keyfirst, ' key not found!')
     
 # define the data keys
 Keyfirst = 'ParameterRequirePorts'
 KeySecond = 'ParameterRequirePort'
 
-DataFirst = fileOneData[Keyfirst]
-DataSecond = fileTwoData[Keyfirst]
-
 if Keyfirst in fileOneData:
+    DataFirst = fileOneData[Keyfirst]
+    DataSecond = fileTwoData[Keyfirst]
     compareKeys(KeySecond)
 else:
-    print('-- no ', Keyfirst, ' find')
+    print('--', Keyfirst, ' key not found!')
     
+# define the data keys
+Keyfirst = 'ParameterLUT'
+KeySecond = 'LUTs_and_Maps'
+
+if Keyfirst in fileOneData:
+    DataFirst = fileOneData[Keyfirst]
+    DataSecond = fileTwoData[Keyfirst]
+    compareKeys(KeySecond)
+else:
+    print('--', Keyfirst, ' key not found!')
+
+print('--END--------------------------------------------------------------------------------------------')
+#EOF

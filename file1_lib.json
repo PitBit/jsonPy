@@ -26,21 +26,24 @@
     ],
     "RequirePorts": [
             {
-                "RequirePort": "AcH_Smo"
+                "RequirePort": "AcH_SMo"
+            },
+            {
+                "RequirePort": "aFYpct_PGV_FcN_DRVopn_en"
             },
             {
                 "RequirePort": "Amf_min_SU_H2Dil_T"
             },
             {
-                "RequirePort": "OldInterface1"
+                "RequirePort": "Amf_min_SU_H2Dil_T"
             },
             {
-                "RequirePort": "OldInterface2"
+                "RequirePort": "MyNiceTest"
             }
         ],
     "ProvidePorts": [
         {
-            "ProvidePort": "aFYopn_DRV_i"
+            "ProvidePort": "aFYopn_DRV"
         },
         {
             "ProvidePort": "FP_Drain_done_T"

@@ -69,15 +69,6 @@
         "CalibrationParameter": "fcu_Amf_WICo_DRV_en_dlyT_P"
     },
     {
-        "CalibrationParameter": "fcu_Amf_WICo_min_DRV_en_P"
-    },
-    {
-        "CalibrationParameter": "fcu_FYopn_DRV_en_SP_P"
-    },
-    {
-        "CalibrationParameter": "fcu_Fp_Si_min_DRV_en_barg_P"
-    },
-    {
         "CalibrationParameter": "fcu_aAMn_ETC_SM_P2"
     },
     {
