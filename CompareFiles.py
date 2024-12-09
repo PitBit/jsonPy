@@ -14,8 +14,8 @@ if len(sys.argv) > 1:
         fileTwoName = sys.argv[1]+'_lib.json'
     print(fileOneName, fileTwoName)
 else:
-    fileOneName = 'in1.json'
-    fileTwoName = 'in2.json'
+    fileOneName = 'file1.json'
+    fileTwoName = 'file1_lib.json'
 
 # define dict for results
 result={"Modul":""}, {"key":"test"}
@@ -40,7 +40,7 @@ def compareKeys(key):
     KeyCnt2 = 0
     findingsCnt = 0
     firstFinding = 0
-    print('----',key,': compare len master', len(DataFirst),' : len old', len(DataSecond),)
+    print('----',key,': compare ', len(DataFirst),' and ', len(DataSecond),)
     while KeyCnt1 < len(DataFirst):
         # check for key in dict
         if key in DataFirst[KeyCnt1]:
@@ -101,7 +101,7 @@ if Keyfirst in fileOneData:
     DataSecond = fileTwoData[Keyfirst]
     compareKeys(KeySecond)
 else:
-    print('--', Keyfirst, ' key not found!')
+    print('----', Keyfirst, ' key not found!')
 
 # define the data keys
 Keyfirst = 'ProvidePorts'
@@ -112,7 +112,7 @@ if Keyfirst in fileOneData:
     DataSecond = fileTwoData[Keyfirst]
     compareKeys(KeySecond)
 else:
-    print('--', Keyfirst, ' key not found!')
+    print('---- ', Keyfirst, ' key not found!')
 
 # define the data keys
 Keyfirst = 'CalibrationParameters'
@@ -123,7 +123,7 @@ if Keyfirst in fileOneData:
     DataSecond = fileTwoData[Keyfirst]
     compareKeys(KeySecond)
 else:
-    print('--', Keyfirst, ' key not found!')
+    print('---- ', Keyfirst, ' key not found!')
     
 # define the data keys
 Keyfirst = 'ParameterRequirePorts'
@@ -134,7 +134,7 @@ if Keyfirst in fileOneData:
     DataSecond = fileTwoData[Keyfirst]
     compareKeys(KeySecond)
 else:
-    print('--', Keyfirst, ' key not found!')
+    print('---- ', Keyfirst, ' key not found!')
     
 # define the data keys
 Keyfirst = 'ParameterLUT'
@@ -145,7 +145,7 @@ if Keyfirst in fileOneData:
     DataSecond = fileTwoData[Keyfirst]
     compareKeys(KeySecond)
 else:
-    print('--', Keyfirst, ' key not found!')
+    print('---- ', Keyfirst, ' key not found!')
 
 print('--END--------------------------------------------------------------------------------------------')
 #EOF
