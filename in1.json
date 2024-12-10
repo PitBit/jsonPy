@@ -1,4 +1,5 @@
 {
+    "Description" :"This file list all modul interfaces",
     "Modul": [
         {
             "name" : "CathodeCtr",
@@ -26,24 +27,21 @@
     ],
     "RequirePorts": [
             {
-                "RequirePort": "AcH_SMo"
-            },
-            {
-                "RequirePort": "aFYpct_PGV_FcN_DRVopn_en"
+                "RequirePort": "AcH_Smo"
             },
             {
                 "RequirePort": "Amf_min_SU_H2Dil_T"
             },
             {
-                "RequirePort": "Amf_min_SU_H2Dil_T"
+                "RequirePort": "OldInterface1"
             },
             {
-                "RequirePort": "MyNiceTest"
+                "RequirePort": "OldInterface2"
             }
         ],
     "ProvidePorts": [
         {
-            "ProvidePort": "aFYopn_DRV"
+            "ProvidePort": "aFYopn_DRV_i"
         },
         {
             "ProvidePort": "FP_Drain_done_T"
@@ -67,6 +65,15 @@
     "CalibrationParameters":[
     {
         "CalibrationParameter": "fcu_Amf_WICo_DRV_en_dlyT_P"
+    },
+    {
+        "CalibrationParameter": "fcu_Amf_WICo_min_DRV_en_P"
+    },
+    {
+        "CalibrationParameter": "fcu_FYopn_DRV_en_SP_P"
+    },
+    {
+        "CalibrationParameter": "fcu_Fp_Si_min_DRV_en_barg_P"
     },
     {
         "CalibrationParameter": "fcu_aAMn_ETC_SM_P2"
@@ -120,6 +127,9 @@
         },
         {
             "ParameterRequirePort": "R_fcu_aAMn_ETC_SD_Anode_P"
+        },
+        {
+            "ParameterRequirePort": "R_fcu_aAMn_ETC_SD_P"
         }
     ]
 }

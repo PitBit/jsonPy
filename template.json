@@ -1,0 +1,111 @@
+{
+  "Modul": {
+    "name": "Modulname",
+    "git": {
+      "url": "",
+      "hash": "",
+      "msg": ""
+    },
+    "script": {
+      "name": "sc",
+      "description": "",
+      "time": "",
+      "git": {
+        "url": "",
+        "hash": "",
+        "msg": ""
+      }
+    }
+  },
+  "deleted":[
+    "RequirePort":[
+      {
+        "RequirePort":""
+      }
+    ]
+  ],
+  "RequirePorts": [
+    {
+      "RequirePort": "FCU_State",
+      "state":"new/compare/check/case sensitiv/change(iniit/DataTypes/)",
+      "PortInterface":"",
+      "DataTypes": ""
+    },
+    {
+      "RequirePort": "R_RequirePort1"
+    },
+    {
+      "RequirePort": "R_RequirePort2"
+    }
+  ],
+  "ProvidePorts": [
+    {
+      "ProvidePort": "aFYopn_DRV"
+    },
+    {
+      "ProvidePort": "FP_Drain_done_T"
+    },
+    {
+      "ProvidePort": "FP_Cycles_done_T"
+    },
+    {
+      "ProvidePort": "SDA_Drain_done_T"
+    },
+    {
+      "ProvidePort": "SDA_Cycles_done_T"
+    },
+    {
+      "ProvidePort": "aFYpct_DRV"
+    },
+    {
+      "ProvidePort": "WL_AKO_filt"
+    },
+    {
+      "ProvidePort": "DRV_openLoop_en"
+    },
+    {
+      "ProvidePort": "P_WL_AKO_stuck_low_mc"
+    },
+    {
+      "ProvidePort": "P_WL_AKO_stuck_low_fc"
+    },
+    {
+      "ProvidePort": "SDA_PGV_cycle"
+    }
+  ],
+  "CalibrationParameters": [
+    {
+      "CalibrationParameter": "fcu_CalibrationParameter1_P"
+    },
+    {
+      "CalibrationParameter": "fcu_CalibrationParameter2_P"
+    }
+  ],
+  "ParameterRequirePorts": [
+    {
+      "ParameterRequirePort": "R_ParameterRequirePort1_P"
+    },
+    {
+      "ParameterRequirePort": "R_ParameterRequirePort2_P"
+    }
+  ],
+  "ParameterLUTs": [
+    {
+      "ParameterLUT": "R_ParameterLUT_M",
+      "Axes": {
+        "axis1": "R_Name1_A",
+        "axis2": "R_Name2_A"
+      }
+    }
+  ],
+  "PIMs":[
+    {
+      "PIM":"PimName"
+    }
+  ],
+  "ParameterRequireAxes":[
+    {
+        "ParameterRequireAxis":"R_ParameterRequireAxis_P"
+    }
+  ]
+}

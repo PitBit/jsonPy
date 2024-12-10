@@ -3,7 +3,6 @@
 
 import sys
 import json
-#import git
 
 # get commad line arguments
 if len(sys.argv) > 1:
@@ -14,8 +13,8 @@ if len(sys.argv) > 1:
         fileTwoName = sys.argv[1]+'_lib.json'
     print(fileOneName, fileTwoName)
 else:
-    fileOneName = 'file1.json'
-    fileTwoName = 'file1_lib.json'
+    fileOneName = 'in1.json'
+    fileTwoName = 'in2.json'
 
 # define dict for results
 result={"Modul":""}, {"key":"test"}
@@ -36,23 +35,25 @@ print(' compare files: \n    -> ', fileOneName,'\n    -> ', fileTwoName, '\n')
 
 def compareKeys(key1, key):
     if key1 in fileOneData:
+        DataFirst = fileOneData[key1]
+        DataSecond = fileTwoData[key1]
+        #key = key1[:-1]
         KeyCnt1 = 0
         KeyCnt2 = 0
         findingsCnt = 0
         firstFinding = 0
-        print('----',key,': compare ', len(fileOneData[key1]),' and ', len(fileTwoData[key1]),)
-        while KeyCnt1 < len(fileOneData[key1]):
+        print('----',key,': compare ', len(DataFirst),' and ', len(DataSecond),)
+        while KeyCnt1 < len(DataFirst):
             # check for key in dict
-            if key in fileOneData[key1][KeyCnt1]:
-                while KeyCnt2 < len(fileTwoData[key1]):
+            if key in DataFirst[KeyCnt1]:
+                while KeyCnt2 < len(DataSecond):
                     # check for key in dict
-                    if key in fileTwoData[key1][KeyCnt2]:
+                    if key in DataSecond[KeyCnt2]:
                         # compare the names
-                        if fileOneData[key1][KeyCnt1][key] == fileTwoData[key1][KeyCnt2][key]:
+                        if DataFirst[KeyCnt1][key] == DataSecond[KeyCnt2][key]:
                             findingsCnt+=1
-                            fileOneData[key1][KeyCnt1]['state'] = 'compared'
-                        elif fileOneData[key1][KeyCnt1][key].lower() == fileTwoData[key1][KeyCnt2][key].lower():
-                            print('    -> case sensitiv\n         ',fileOneData[key1][KeyCnt1][key],' != ', fileTwoData[key1][KeyCnt2][key])
+                        elif DataFirst[KeyCnt1][key].lower() == DataSecond[KeyCnt2][key].lower():
+                            print('    -> case sensitiv\n         ',DataFirst[KeyCnt1][key],' != ', DataSecond[KeyCnt2][key])
                             findingsCnt+=1
                     KeyCnt2+=1
                 KeyCnt2=0
@@ -60,8 +61,8 @@ def compareKeys(key1, key):
                     if firstFinding == 0:
                         print('    -> new:')
                         firstFinding=1
-                    print('        ', fileOneData[key1][KeyCnt1][key])
-                    fileOneData[key1][KeyCnt1]['state'] = 'new'
+                    print('        ', DataFirst[KeyCnt1][key])
+                    DataFirst[KeyCnt1]['state'] = 'new'
                 findingsCnt=0
             else:
                 print('-- WARNING: key ', key, ' not found, wrong scruct?')
@@ -70,19 +71,19 @@ def compareKeys(key1, key):
         KeyCnt2 = 0
         findingsCnt = 0
         firstFinding = 0
-        while KeyCnt2 < len(fileTwoData[key1]):
-            if key in fileTwoData[key1][KeyCnt2]:
-                while KeyCnt1 < len(fileOneData[key1]):
-                    if fileOneData[key1][KeyCnt1][key] != fileTwoData[key1][KeyCnt2][key]:
-                        if fileOneData[key1][KeyCnt1][key].lower() != fileTwoData[key1][KeyCnt2][key].lower():
+        while KeyCnt2 < len(DataSecond):
+            if key in DataSecond[KeyCnt2]:
+                while KeyCnt1 < len(DataFirst):
+                    if DataFirst[KeyCnt1][key] != DataSecond[KeyCnt2][key]:
+                        if DataFirst[KeyCnt1][key].lower() != DataSecond[KeyCnt2][key].lower():
                             findingsCnt+=1
                     KeyCnt1+=1
                 KeyCnt1 = 0
-                if findingsCnt == len(fileOneData[key1]):
+                if findingsCnt == len(DataFirst):
                     if firstFinding == 0:
                         print('    -> deleted:')
                         firstFinding=1
-                    print('        ', fileTwoData[key1][KeyCnt2][key])
+                    print('        ', DataSecond[KeyCnt2][key])
                 findingsCnt = 0
             KeyCnt2+=1
         print('\n') #print('----', key,' done\n')
@@ -95,15 +96,6 @@ compareKeys('ProvidePorts', 'ProvidePort')
 compareKeys('CalibrationParameters','CalibrationParameter')
 compareKeys('ParameterRequirePorts', 'ParameterRequirePort')
 compareKeys('ParameterLUT', 'LUTs_and_Maps')
-
-# g = git.Git('/./') 
-# hexshas = g.log('--pretty=%H','--follow','--',filename).split('\n') 
-# print(hexshas)
-
-# store changed json into file
-fileOneS = open(fileOneName, 'w')
-json.dump(fileOneData, fileOneS, ensure_ascii=False, indent=4)
-fileOneS.close()
 
 print('--END--------------------------------------------------------------------------------------------')
 #EOF
