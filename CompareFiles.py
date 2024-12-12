@@ -1,5 +1,10 @@
 #!python
 # script to search same or not same string in json files
+# ToDo:
+# - fill the deletet key
+# - add git script information
+# - create JSON file for output
+# - define JSON template for output
 
 import sys
 import json
@@ -14,8 +19,8 @@ if len(sys.argv) > 1:
         fileTwoName = sys.argv[1]+'_lib.json'
     print(fileOneName, fileTwoName)
 else:
-    fileOneName = 'file1.json'
-    fileTwoName = 'file1_lib.json'
+    fileOneName = 'file1_lib.json'
+    fileTwoName = 'file1.json'
 
 # define dict for results
 result={"Modul":""}, {"key":"test"}
@@ -81,6 +86,10 @@ def compareKeys(key1, key):
                 if findingsCnt == len(fileOneData[key1]):
                     if firstFinding == 0:
                         print('    -> deleted:')
+                        if not 'deleted' in fileOneData:
+                            fileOneData['deleted'] = ''
+                        elif not key in fileOneData['deleted']:  
+                            fileOneData['deleted'][key]=''
                         firstFinding=1
                     print('        ', fileTwoData[key1][KeyCnt2][key])
                 findingsCnt = 0

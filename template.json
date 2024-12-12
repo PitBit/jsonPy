@@ -27,7 +27,7 @@
   "RequirePorts": [
     {
       "RequirePort": "FCU_State",
-      "state":"new/compare/check/case sensitiv/change(iniit/DataTypes/)",
+      "state":"new/compared/check/case sensitiv/change(init/DataTypes/)",
       "PortInterface":"",
       "DataTypes": ""
     },

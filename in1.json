@@ -106,9 +106,6 @@
         "CalibrationParameter": "fcu_AcH_SMo_aFYcls_open_Loop_en_S1"
     },
     {
-        "CalibrationParameter": "fcu_Wm_AKO_full_P"
-    },
-    {
         "CalibrationParameter": "fcu_Wm_AKO_max_P"
     },
     {
