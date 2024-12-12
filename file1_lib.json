@@ -30,8 +30,8 @@
             "state": "compared"
         },
         {
-            "RequirePort": "Amf_min_SU_H2Dil_T",
-            "state": "compared"
+            "RequirePort": "Amf_min_SU_H2dil_T",
+            "state": "check_4_case_sensitiv"
         },
         {
             "RequirePort": "Amf_min_SU_H2Dil_T",
@@ -39,7 +39,7 @@
         },
         {
             "RequirePort": "MyNiceTest",
-            "state": "compared"
+            "state": "new"
         }
     ],
     "ProvidePorts": [
@@ -159,6 +159,5 @@
             "ParameterRequirePort": "R_fcu_aAMn_ETC_SD_Anode_P",
             "state": "compared"
         }
-    ],
-    "deleted": ""
+    ]
 }

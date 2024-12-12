@@ -31,7 +31,7 @@
             "state": "compared"
         },
         {
-            "RequirePort": "aFYpct_PGV_FcN_DRVopn_en",
+            "RequirePort": "aFYpct_PGV_FcN_DRvopn_en",
             "state": "compared"
         },
         {
@@ -43,7 +43,11 @@
             "state": "compared"
         },
         {
-            "RequirePort": "MyNiceTest",
+            "RequirePort": "MyNiceTest1",
+            "state": "compared"
+        },
+        {
+            "RequirePort": "MyNiceTest2",
             "state": "compared"
         }
     ],

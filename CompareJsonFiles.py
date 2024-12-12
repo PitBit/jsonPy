@@ -1,10 +1,21 @@
 #!python
 # script to search same or not same string in json files
+# Done:
+# (x) read both files
+# (x) get filename as argument
+# (x) find new  interfaces
+# (x) find deleted interfaces
+# (x) find case sensitiv names
+# (x) update json for status with same name
+# (x) update json for case sensetiv
+# (x) update json for deleted interfaces
+#
 # ToDo:
-# - fill the deletet key
-# - add git script information
-# - create JSON file for output
-# - define JSON template for output
+# (-) fill the delete elements
+# (-) add git script information
+# (-) create JSON file for output
+# (-) define JSON template for output
+# (-) catch the eeror by "Doesn't exist"
 
 import sys
 import json
@@ -22,9 +33,6 @@ else:
     fileOneName = 'file1_lib.json'
     fileTwoName = 'file1.json'
 
-# define dict for results
-result={"Modul":""}, {"key":"test"}
-
 # Open first JSON file and returns JSON object as a dictionary
 # it want to be master file
 fileOne = open(fileOneName)
@@ -40,6 +48,7 @@ print('\n--START----------------------------------------------------------------
 print(' compare files: \n    -> ', fileOneName,'\n    -> ', fileTwoName, '\n')
 
 def compareKeys(key1, key):
+    # check if key available in file data
     if key1 in fileOneData:
         KeyCnt1 = 0
         KeyCnt2 = 0
@@ -58,6 +67,7 @@ def compareKeys(key1, key):
                             fileOneData[key1][KeyCnt1]['state'] = 'compared'
                         elif fileOneData[key1][KeyCnt1][key].lower() == fileTwoData[key1][KeyCnt2][key].lower():
                             print('    -> case sensitiv\n         ',fileOneData[key1][KeyCnt1][key],' != ', fileTwoData[key1][KeyCnt2][key])
+                            fileOneData[key1][KeyCnt1]['state'] = 'check_4_case_sensitiv'
                             findingsCnt+=1
                     KeyCnt2+=1
                 KeyCnt2=0
@@ -75,6 +85,8 @@ def compareKeys(key1, key):
         KeyCnt2 = 0
         findingsCnt = 0
         firstFinding = 0
+        deletedIfCnt = 0
+        # use data fron second file to see what was deleted
         while KeyCnt2 < len(fileTwoData[key1]):
             if key in fileTwoData[key1][KeyCnt2]:
                 while KeyCnt1 < len(fileOneData[key1]):
@@ -84,17 +96,22 @@ def compareKeys(key1, key):
                     KeyCnt1+=1
                 KeyCnt1 = 0
                 if findingsCnt == len(fileOneData[key1]):
-                    if firstFinding == 0:
-                        print('    -> deleted:')
-                        if not 'deleted' in fileOneData:
-                            fileOneData['deleted'] = ''
-                        elif not key in fileOneData['deleted']:  
-                            fileOneData['deleted'][key]=''
-                        firstFinding=1
+                    # create sctuct for deleted interfases
+                    # if firstFinding == 0:
+                    #     print('    -> deleted:')
+                    #     if not 'deleted' in fileOneData:
+                    #         fileOneData['deleted'] = [key1]
+                    #     if not key1 in fileOneData['deleted']:
+                    #         fileOneData['deleted'][key1]=[' ']
+                        # tempData = [key]
+                        # firstFinding=1
                     print('        ', fileTwoData[key1][KeyCnt2][key])
+                    #tempData[0][deletedIfCnt]=fileTwoData[key1][KeyCnt2][key]
+                    deletedIfCnt+=1
                 findingsCnt = 0
             KeyCnt2+=1
         print('\n') #print('----', key,' done\n')
+        # print(tempData)
     else:
         print('----', key1, ' key not found!')
 #-----------------------------------------------------------------------------------------------------------
