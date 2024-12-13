@@ -159,5 +159,12 @@
             "ParameterRequirePort": "R_fcu_aAMn_ETC_SD_Anode_P",
             "state": "compared"
         }
+    ],
+    "deleted": [
+        [
+            {
+                "RequirePort": "MyNiceTest2"
+            }
+        ]
     ]
 }

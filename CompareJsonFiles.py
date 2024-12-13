@@ -86,6 +86,7 @@ def compareKeys(key1, key):
         findingsCnt = 0
         firstFinding = 0
         deletedIfCnt = 0
+        addNewKey=0
         # use data fron second file to see what was deleted
         while KeyCnt2 < len(fileTwoData[key1]):
             if key in fileTwoData[key1][KeyCnt2]:
@@ -97,16 +98,18 @@ def compareKeys(key1, key):
                 KeyCnt1 = 0
                 if findingsCnt == len(fileOneData[key1]):
                     # create sctuct for deleted interfases
-                    # if firstFinding == 0:
-                    #     print('    -> deleted:')
-                    #     if not 'deleted' in fileOneData:
-                    #         fileOneData['deleted'] = [key1]
-                    #     if not key1 in fileOneData['deleted']:
-                    #         fileOneData['deleted'][key1]=[' ']
-                        # tempData = [key]
-                        # firstFinding=1
+                    if firstFinding == 0:
+                        print('    -> deleted:')
+                        firstFinding=1
+                    if not 'deleted' in fileOneData:
+                        fileOneData['deleted'] = []
+                    if not key1 in fileOneData['deleted']:
+                        if addNewKey <1:
+                            fileOneData['deleted']=[{key1:[]}]
+                            addNewKey+=1
+                    if not key in fileOneData['deleted'][len(fileOneData['deleted'])-1]:
+                        fileOneData['deleted'][len(fileOneData['deleted'])-1]=[{key:fileTwoData[key1][KeyCnt2][key]}]
                     print('        ', fileTwoData[key1][KeyCnt2][key])
-                    #tempData[0][deletedIfCnt]=fileTwoData[key1][KeyCnt2][key]
                     deletedIfCnt+=1
                 findingsCnt = 0
             KeyCnt2+=1
