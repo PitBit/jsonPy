@@ -19,6 +19,7 @@
 
 import sys
 import json
+import datetime
 #import git
 
 # get commad line arguments
@@ -39,10 +40,17 @@ fileOne = open(fileOneName)
 fileOneData = json.load(fileOne)
 fileOne.close()
 
+# delete key "deleted"
+fileOneData.pop('deleted', None)
+
 # Open second JSON file and returns JSON object as a dictionary
 fileTwo = open(fileTwoName)
 fileTwoData = json.load(fileTwo)
 fileTwo.close()
+
+if not 'Script' in fileOneData:
+    fileOneData['Script']={}
+fileOneData['Script']['CompareJsonFile']={'time':'datetime.datetime.now()'}
 
 print('\n--START------------------------------------------------------------------------------------------')
 print(' compare files: \n    -> ', fileOneName,'\n    -> ', fileTwoName, '\n')
@@ -86,7 +94,6 @@ def compareKeys(key1, key):
         findingsCnt = 0
         firstFinding = 0
         deletedIfCnt = 0
-        addNewKey=0
         # use data fron second file to see what was deleted
         while KeyCnt2 < len(fileTwoData[key1]):
             if key in fileTwoData[key1][KeyCnt2]:
@@ -97,18 +104,16 @@ def compareKeys(key1, key):
                     KeyCnt1+=1
                 KeyCnt1 = 0
                 if findingsCnt == len(fileOneData[key1]):
-                    # create sctuct for deleted interfases
+                    # create sctuct for deleted interfaces
                     if firstFinding == 0:
                         print('    -> deleted:')
                         firstFinding=1
                     if not 'deleted' in fileOneData:
-                        fileOneData['deleted'] = []
+                        fileOneData['deleted'] = {key1:[]}
                     if not key1 in fileOneData['deleted']:
-                        if addNewKey <1:
-                            fileOneData['deleted']=[{key1:[]}]
-                            addNewKey+=1
-                    if not key in fileOneData['deleted'][len(fileOneData['deleted'])-1]:
-                        fileOneData['deleted'][len(fileOneData['deleted'])-1]=[{key:fileTwoData[key1][KeyCnt2][key]}]
+                        fileOneData['deleted'][key1]=[]
+                    if not key in fileOneData['deleted'][key1]:
+                        fileOneData['deleted'][key1].append({key:fileTwoData[key1][KeyCnt2][key]})
                     print('        ', fileTwoData[key1][KeyCnt2][key])
                     deletedIfCnt+=1
                 findingsCnt = 0

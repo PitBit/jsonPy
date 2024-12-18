@@ -79,6 +79,10 @@
         {
             "ProvidePort": "WL_AKO_filt",
             "state": "compared"
+        },
+        {
+            "ProvidePort": "TEstProvidePort",
+            "state": "compared"
         }
     ],
     "CalibrationParameters": [
@@ -166,6 +170,10 @@
         },
         {
             "ParameterRequirePort": "R_fcu_aAMn_ETC_SD_Anode_P",
+            "state": "compared"
+        },
+        {
+            "ParameterRequirePort": "R_test1_P",
             "state": "compared"
         }
     ]

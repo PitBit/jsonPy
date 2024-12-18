@@ -1,29 +1,28 @@
 {
+  "Description":"This ist a template File for Json file structure",
   "Modul": {
-    "name": "Modulname",
+    "name": "CathodeCtr",
     "git": {
       "url": "",
       "hash": "",
       "msg": ""
-    },
-    "script": {
-      "name": "sc",
-      "description": "",
-      "time": "",
-      "git": {
-        "url": "",
-        "hash": "",
-        "msg": ""
-      }
     }
   },
-  "deleted":[
-    "RequirePort":[
-      {
-        "RequirePort":""
-      }
+  "deleted": {
+    "RequirePorts": [
+        {
+            "RequirePort": "aFYpct_PGV_FcN_DRvopn_en"
+        },
+        {
+            "RequirePort": "MyNiceTest1"
+        }
+    ],
+    "ProvidePorts": [
+        {
+            "ProvidePort": "TEstProvidePort"
+        }
     ]
-  ],
+  },
   "RequirePorts": [
     {
       "RequirePort": "FCU_State",
@@ -106,6 +105,25 @@
   "ParameterRequireAxes":[
     {
         "ParameterRequireAxis":"R_ParameterRequireAxis_P"
+    }
+  ],
+  "themes":[
+    {
+      "theme":"https://marketplace.visualstudio.com/items?itemName=stephenwassell.light-high-contrast-theme"
+    },
+    {
+      "theme":"https://marketplace.visualstudio.com/items?itemName=JDSE.Theme-High-Contrast-Dark"
+    },
+    {
+      "theme":"https://marketplace.visualstudio.com/items?itemName=Nimda.deepdark-material"
+    }
+  ],
+  "Links":[
+    {
+      "Link":"https://stackoverflow.com/questions/2241891/how-to-initialize-a-dict-with-keys-from-a-list-and-empty-value-in-python"
+    },
+    {
+      "Link":"https://stackoverflow.com/questions/48581767/python-adding-key-value-parts-to-empty-dict#48581905"
     }
   ]
 }
