@@ -50,7 +50,7 @@ fileTwo.close()
 
 if not 'Script' in fileOneData:
     fileOneData['Script']={}
-fileOneData['Script']['CompareJsonFile']={'time':'datetime.datetime.now()'}
+fileOneData['Script']['CompareJsonFile']={'description':'This script compare two different JSON Files with Matlab Model interface description','time':'datetime.datetime.now()'}
 
 print('\n--START------------------------------------------------------------------------------------------')
 print(' compare files: \n    -> ', fileOneName,'\n    -> ', fileTwoName, '\n')

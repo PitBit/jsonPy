@@ -18,6 +18,7 @@
     ],
     "Script": {
         "CompareJsonFile": {
+            "description": "This script compare two different JSON Files with Matlab Model interface description",
             "time": "datetime.datetime.now()"
         }
     },
