@@ -9,13 +9,14 @@
 # (x) update json for status with same name
 # (x) update json for case sensetiv
 # (x) update json for deleted interfaces
+# (x) fill the delete elements
+# (x) fill the delete elements
 #
 # ToDo:
-# (-) fill the delete elements
 # (-) add git script information
-# (-) create JSON file for output
+# (-) create JSON file for output ->20241220 I think we don´t need this
 # (-) define JSON template for output
-# (-) catch the eeror by "Doesn't exist"
+# (-) catch the eeror by "Doesn't exist", all information are inside...
 
 import sys
 import json
@@ -40,8 +41,13 @@ fileOne = open(fileOneName)
 fileOneData = json.load(fileOne)
 fileOne.close()
 
-# delete key "deleted"
-fileOneData.pop('deleted', None)
+# delete key section "Deleted"
+if 'Deleted' in fileOneData:
+    fileOneData.pop('Deleted', None)
+
+# delete key section "New"
+if 'New' in fileOneData:
+    fileOneData.pop('New', None)
 
 # Open second JSON file and returns JSON object as a dictionary
 fileTwo = open(fileTwoName)
@@ -50,7 +56,12 @@ fileTwo.close()
 
 if not 'Script' in fileOneData:
     fileOneData['Script']={}
-fileOneData['Script']['CompareJsonFile']={'description':'This script compare two different JSON Files with Matlab Model interface description','time':'datetime.datetime.now()'}
+
+datetimenow = str(datetime.datetime.now())
+fileOneData['Script']['CompareJsonFile'] = {'description':'This script compare two different JSON Files, new and old file, with Matlab Model interface description'}
+fileOneData['Script']['CompareJsonFile']['time'] = datetimenow
+fileOneData['Script']['CompareJsonFile']['newFile'] = fileOneName
+fileOneData['Script']['CompareJsonFile']['oldFile'] = fileTwoName
 
 print('\n--START------------------------------------------------------------------------------------------')
 print(' compare files: \n    -> ', fileOneName,'\n    -> ', fileTwoName, '\n')
@@ -83,6 +94,15 @@ def compareKeys(key1, key):
                     if firstFinding == 0:
                         print('    -> new:')
                         firstFinding=1
+
+                    # create new section 'New' and write 
+                    if not 'New' in fileOneData:
+                        fileOneData['New'] = {key1:[]}
+                    if not key1 in fileOneData['New']:
+                        fileOneData['New'][key1]=[]
+                    if not key in fileOneData['New'][key1]:
+                        fileOneData['New'][key1].append({key:fileTwoData[key1][KeyCnt2][key]})
+                    #
                     print('        ', fileOneData[key1][KeyCnt1][key])
                     fileOneData[key1][KeyCnt1]['state'] = 'new'
                 findingsCnt=0
@@ -106,14 +126,14 @@ def compareKeys(key1, key):
                 if findingsCnt == len(fileOneData[key1]):
                     # create sctuct for deleted interfaces
                     if firstFinding == 0:
-                        print('    -> deleted:')
+                        print('    -> Deleted:')
                         firstFinding=1
-                    if not 'deleted' in fileOneData:
-                        fileOneData['deleted'] = {key1:[]}
-                    if not key1 in fileOneData['deleted']:
-                        fileOneData['deleted'][key1]=[]
-                    if not key in fileOneData['deleted'][key1]:
-                        fileOneData['deleted'][key1].append({key:fileTwoData[key1][KeyCnt2][key]})
+                    if not 'Deleted' in fileOneData:
+                        fileOneData['Deleted'] = {key1:[]}
+                    if not key1 in fileOneData['Deleted']:
+                        fileOneData['Deleted'][key1]=[]
+                    if not key in fileOneData['Deleted'][key1]:
+                        fileOneData['Deleted'][key1].append({key:fileTwoData[key1][KeyCnt2][key]})
                     print('        ', fileTwoData[key1][KeyCnt2][key])
                     deletedIfCnt+=1
                 findingsCnt = 0
@@ -135,9 +155,9 @@ compareKeys('ParameterLUT', 'LUTs_and_Maps')
 # print(hexshas)
 
 # store changed json into file
-fileOneS = open(fileOneName, 'w')
-json.dump(fileOneData, fileOneS, ensure_ascii=False, indent=4)
-fileOneS.close()
+fileOne = open(fileOneName, 'w')
+json.dump(fileOneData, fileOne, ensure_ascii=False, indent=4)
+fileOne.close()
 
 print('--END--------------------------------------------------------------------------------------------')
 #EOF

@@ -18,8 +18,10 @@
     ],
     "Script": {
         "CompareJsonFile": {
-            "description": "This script compare two different JSON Files with Matlab Model interface description",
-            "time": "datetime.datetime.now()"
+            "description": "This script compare two different JSON Files, new and old files, with Matlab Model interface description",
+            "time": "2024-12-19 20:39:50.089676",
+            "newFile": "file1_lib.json",
+            "oldFile": "file1.json"
         }
     },
     "RequirePorts": [
@@ -98,7 +100,19 @@
             "state": "compared"
         }
     ],
-    "deleted": {
+    "New": {
+        "RequirePorts": [
+            {
+                "RequirePort": "AcH_SMo"
+            }
+        ],
+        "CalibrationParameters": [
+            {
+                "CalibrationParameter": "fcu_Amf_WICo_DRV_en_dlyT_P"
+            }
+        ]
+    },
+    "Deleted": {
         "RequirePorts": [
             {
                 "RequirePort": "aFYpct_PGV_FcN_DRvopn_en"
