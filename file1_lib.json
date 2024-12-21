@@ -18,8 +18,8 @@
     ],
     "Script": {
         "CompareJsonFile": {
-            "description": "This script compare two different JSON Files, new and old files, with Matlab Model interface description",
-            "time": "2024-12-19 20:39:50.089676",
+            "description": "This script compare two different JSON Files, new and old file, with Matlab Model interface description",
+            "time": "2024-12-21 11:19:39.601728",
             "newFile": "file1_lib.json",
             "oldFile": "file1.json"
         }
@@ -40,6 +40,18 @@
         {
             "RequirePort": "MyNiceTest",
             "state": "new"
+        },
+        {
+            "RequirePort": "aFYpct_PGV_FcN_DRvopn_en",
+            "state": "deleted"
+        },
+        {
+            "RequirePort": "MyNiceTest1",
+            "state": "deleted"
+        },
+        {
+            "RequirePort": "MyNiceTest2",
+            "state": "deleted"
         }
     ],
     "ProvidePorts": [
@@ -70,6 +82,10 @@
         {
             "ProvidePort": "WL_AKO_filt",
             "state": "compared"
+        },
+        {
+            "ProvidePort": "TEstProvidePort",
+            "state": "deleted"
         }
     ],
     "CalibrationParameters": [
@@ -88,6 +104,58 @@
         {
             "CalibrationParameter": "fcu_test_P",
             "state": "new"
+        },
+        {
+            "CalibrationParameter": "fcu_Fp_Si_min_DRV_en_barg_P",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_aAMn_ETC_SM_P2",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_aAMn_ETC_SM_P4",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_V_AKO_ctrlKp_SimP",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_V_AKO_ctrlTn_SimP",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_V_H2Ol_AKO_req_SimP",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_Wm_AKO_full_P",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_Wm_AKO_min_P",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_Wm_AKO_max_P",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_AcH_SMo_aFYcls_open_Loop_en_S",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_AcH_SMo_aFYcls_open_Loop_en_S1",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_DRV_openLoop_en_S",
+            "state": "deleted"
+        },
+        {
+            "CalibrationParameter": "fcu_DRV_openLoop_en_V",
+            "state": "deleted"
         }
     ],
     "ParameterRequirePorts": [
@@ -98,91 +166,10 @@
         {
             "ParameterRequirePort": "R_fcu_aAMn_ETC_SD_Anode_P",
             "state": "compared"
+        },
+        {
+            "ParameterRequirePort": "R_test1_P",
+            "state": "deleted"
         }
-    ],
-    "New": {
-        "RequirePorts": [
-            {
-                "RequirePort": "AcH_SMo"
-            }
-        ],
-        "CalibrationParameters": [
-            {
-                "CalibrationParameter": "fcu_Amf_WICo_DRV_en_dlyT_P"
-            }
-        ]
-    },
-    "Deleted": {
-        "RequirePorts": [
-            {
-                "RequirePort": "aFYpct_PGV_FcN_DRvopn_en"
-            },
-            {
-                "RequirePort": "MyNiceTest1"
-            },
-            {
-                "RequirePort": "MyNiceTest2"
-            }
-        ],
-        "ProvidePorts": [
-            {
-                "ProvidePort": "TEstProvidePort"
-            }
-        ],
-        "CalibrationParameters": [
-            {
-                "CalibrationParameter": "fcu_Fp_Si_min_DRV_en_barg_P"
-            },
-            {
-                "CalibrationParameter": "fcu_aAMn_ETC_SM_P2"
-            },
-            {
-                "CalibrationParameter": "fcu_aAMn_ETC_SM_P4"
-            },
-            {
-                "CalibrationParameter": "fcu_V_AKO_ctrlKp_SimP"
-            },
-            {
-                "CalibrationParameter": "fcu_V_AKO_ctrlTn_SimP"
-            },
-            {
-                "CalibrationParameter": "fcu_V_H2Ol_AKO_req_SimP"
-            },
-            {
-                "CalibrationParameter": "fcu_Wm_AKO_full_P"
-            },
-            {
-                "CalibrationParameter": "fcu_Wm_AKO_min_P"
-            },
-            {
-                "CalibrationParameter": "fcu_Wm_AKO_max_P"
-            },
-            {
-                "CalibrationParameter": "fcu_AcH_SMo_aFYcls_open_Loop_en_S"
-            },
-            {
-                "CalibrationParameter": "fcu_AcH_SMo_aFYcls_open_Loop_en_S1"
-            },
-            {
-                "CalibrationParameter": "fcu_Wm_AKO_full_P"
-            },
-            {
-                "CalibrationParameter": "fcu_Wm_AKO_max_P"
-            },
-            {
-                "CalibrationParameter": "fcu_Wm_AKO_min_P"
-            },
-            {
-                "CalibrationParameter": "fcu_DRV_openLoop_en_S"
-            },
-            {
-                "CalibrationParameter": "fcu_DRV_openLoop_en_V"
-            }
-        ],
-        "ParameterRequirePorts": [
-            {
-                "ParameterRequirePort": "R_test1_P"
-            }
-        ]
-    }
+    ]
 }

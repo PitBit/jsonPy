@@ -11,17 +11,26 @@
 # (x) update json for deleted interfaces
 # (x) fill the delete elements
 # (x) fill the delete elements
+# (x) catch the state of deleted interfaces
 #
 # ToDo:
 # (-) add git script information
 # (-) create JSON file for output ->20241220 I think we don´t need this
 # (-) define JSON template for output
 # (-) catch the eeror by "Doesn't exist", all information are inside...
+# (-) report master file as excel file
 
 import sys
 import json
 import datetime
 #import git
+
+# enable write new interfaces to json file as own key
+writeNewIf2Json = False
+# enable  write delete interfaces to json file as own key
+writeDelIf2Json = False
+# enable write delete interfaces to same key in json file
+writeDelIf2KeyInJson = True
 
 # get commad line arguments
 if len(sys.argv) > 1:
@@ -66,6 +75,12 @@ fileOneData['Script']['CompareJsonFile']['oldFile'] = fileTwoName
 print('\n--START------------------------------------------------------------------------------------------')
 print(' compare files: \n    -> ', fileOneName,'\n    -> ', fileTwoName, '\n')
 
+#------------------------------------------------------------------------------------------------
+# function for compare file data
+# parameter: key1=first key in json file,
+# global prameter: writeNewIf2Json, writeDelIf2Json, writeDelIf2KeyInJson
+# global data: fileOneData, fileOneData
+#
 def compareKeys(key1, key):
     # check if key available in file data
     if key1 in fileOneData:
@@ -78,30 +93,33 @@ def compareKeys(key1, key):
             # check for key in dict
             if key in fileOneData[key1][KeyCnt1]:
                 while KeyCnt2 < len(fileTwoData[key1]):
-                    # check for key in dict
-                    if key in fileTwoData[key1][KeyCnt2]:
-                        # compare the names
-                        if fileOneData[key1][KeyCnt1][key] == fileTwoData[key1][KeyCnt2][key]:
-                            findingsCnt+=1
-                            fileOneData[key1][KeyCnt1]['state'] = 'compared'
-                        elif fileOneData[key1][KeyCnt1][key].lower() == fileTwoData[key1][KeyCnt2][key].lower():
-                            print('    -> case sensitiv\n         ',fileOneData[key1][KeyCnt1][key],' != ', fileTwoData[key1][KeyCnt2][key])
-                            fileOneData[key1][KeyCnt1]['state'] = 'check_4_case_sensitiv'
-                            findingsCnt+=1
+                    # check for delete state, dont compare this element
+                    if fileOneData[key1][KeyCnt1]['state'] != 'deleted':
+                        # check for key in dict
+                        if key in fileTwoData[key1][KeyCnt2]:
+                            # compare the names
+                            if fileOneData[key1][KeyCnt1][key] == fileTwoData[key1][KeyCnt2][key]:
+                                findingsCnt+=1
+                                fileOneData[key1][KeyCnt1]['state'] = 'compared'
+                            elif fileOneData[key1][KeyCnt1][key].lower() == fileTwoData[key1][KeyCnt2][key].lower():
+                                print('    -> case sensitiv\n         ',fileOneData[key1][KeyCnt1][key],' != ', fileTwoData[key1][KeyCnt2][key])
+                                fileOneData[key1][KeyCnt1]['state'] = 'check_4_case_sensitiv'
+                                findingsCnt+=1
                     KeyCnt2+=1
                 KeyCnt2=0
-                if findingsCnt == 0:
+                if findingsCnt == 0 and fileOneData[key1][KeyCnt1]['state'] != 'deleted':
                     if firstFinding == 0:
                         print('    -> new:')
                         firstFinding=1
 
-                    # create new section 'New' and write 
-                    if not 'New' in fileOneData:
-                        fileOneData['New'] = {key1:[]}
-                    if not key1 in fileOneData['New']:
-                        fileOneData['New'][key1]=[]
-                    if not key in fileOneData['New'][key1]:
-                        fileOneData['New'][key1].append({key:fileTwoData[key1][KeyCnt2][key]})
+                    # create new section 'New' and write
+                    if writeNewIf2Json:
+                        if not 'New' in fileOneData:
+                            fileOneData['New'] = {key1:[]}
+                        if not key1 in fileOneData['New']:
+                            fileOneData['New'][key1]=[]
+                        if not key in fileOneData['New'][key1]:
+                            fileOneData['New'][key1].append({key:fileTwoData[key1][KeyCnt2][key]})
                     #
                     print('        ', fileOneData[key1][KeyCnt1][key])
                     fileOneData[key1][KeyCnt1]['state'] = 'new'
@@ -124,16 +142,25 @@ def compareKeys(key1, key):
                     KeyCnt1+=1
                 KeyCnt1 = 0
                 if findingsCnt == len(fileOneData[key1]):
-                    # create sctuct for deleted interfaces
                     if firstFinding == 0:
                         print('    -> Deleted:')
                         firstFinding=1
-                    if not 'Deleted' in fileOneData:
-                        fileOneData['Deleted'] = {key1:[]}
-                    if not key1 in fileOneData['Deleted']:
-                        fileOneData['Deleted'][key1]=[]
-                    if not key in fileOneData['Deleted'][key1]:
-                        fileOneData['Deleted'][key1].append({key:fileTwoData[key1][KeyCnt2][key]})
+
+                    # create sctuct for deleted interfaces
+                    if writeDelIf2Json:
+                        if not 'Deleted' in fileOneData:
+                            fileOneData['Deleted'] = {key1:[]}
+                        if not key1 in fileOneData['Deleted']:
+                            fileOneData['Deleted'][key1]=[]
+                        if not key in fileOneData['Deleted'][key1]:
+                            fileOneData['Deleted'][key1].append({key:fileTwoData[key1][KeyCnt2][key]})
+                    #
+                    # write deleted elements into key (append)
+                    if writeDelIf2KeyInJson:
+                        print('')
+                        fileOneData[key1].append({key:fileTwoData[key1][KeyCnt2][key]})
+                        fileOneData[key1][findingsCnt]['state'] = 'deleted'
+
                     print('        ', fileTwoData[key1][KeyCnt2][key])
                     deletedIfCnt+=1
                 findingsCnt = 0
