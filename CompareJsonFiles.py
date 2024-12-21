@@ -12,17 +12,21 @@
 # (x) fill the delete elements
 # (x) fill the delete elements
 # (x) catch the state of deleted interfaces
+# (x) report master file as excel file
+# (x) added colom autofit
+# (x) added filter, but filter value is not working
 #
 # ToDo:
 # (-) add git script information
 # (-) create JSON file for output ->20241220 I think we don´t need this
 # (-) define JSON template for output
 # (-) catch the eeror by "Doesn't exist", all information are inside...
-# (-) report master file as excel file
+# (-) catch error if excel file is open Permission denied
 
-import sys
+import sys, os
 import json
 import datetime
+import xlsxwriter
 #import git
 
 # enable write new interfaces to json file as own key
@@ -75,7 +79,7 @@ fileOneData['Script']['CompareJsonFile']['oldFile'] = fileTwoName
 print('\n--START------------------------------------------------------------------------------------------')
 print(' compare files: \n    -> ', fileOneName,'\n    -> ', fileTwoName, '\n')
 
-#------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------
 # function for compare file data
 # parameter: key1=first key in json file,
 # global prameter: writeNewIf2Json, writeDelIf2Json, writeDelIf2KeyInJson
@@ -185,6 +189,46 @@ compareKeys('ParameterLUT', 'LUTs_and_Maps')
 fileOne = open(fileOneName, 'w')
 json.dump(fileOneData, fileOne, ensure_ascii=False, indent=4)
 fileOne.close()
+
+#------------------------------------------------------------------------------------------------
+# export JSON file to excel
+# global data: fileOneData
+workbook = xlsxwriter.Workbook("Interfaces.xlsx")
+
+dirname, fname = os.path.split(fileOneName)
+sheet = workbook.add_worksheet(fname)
+cell_format = workbook.add_format()
+cell_format.set_bold(True)
+
+sheet.write(0, 0, 'New JSON')
+sheet.write(0, 1, fileOneName)
+sheet.write(1, 0, 'Old JSON')
+sheet.write(1, 1, fileTwoName)
+sheet.write(2, 0, 'Timestamp')
+sheet.write(2, 1, datetimenow)
+sheet.write(4, 0, 'InterfaceType', cell_format)
+sheet.write(4, 1, 'InterfaceName', cell_format)
+sheet.write(4, 2, 'State', cell_format)
+
+findingsCnt = 0
+for DataFirstKey in fileOneData:
+    Data2ndElement = 0
+    if DataFirstKey !='Description' and DataFirstKey !='Modul' and DataFirstKey !='Script':
+        while Data2ndElement < len(fileOneData[DataFirstKey]):
+            findingsCnt+=1
+            ElementCnt = 0
+            for Data3rdKey in fileOneData[DataFirstKey][Data2ndElement]:
+                # put in excel from 5,1
+                sheet.write(4+findingsCnt, 0, DataFirstKey)
+                sheet.write(4+findingsCnt, 1 + ElementCnt, fileOneData[DataFirstKey][Data2ndElement][Data3rdKey])
+                ElementCnt += 1
+            Data2ndElement+=1
+
+sheet.autofit()
+sheet.autofilter(4,0,(findingsCnt+4),5)
+sheet.filter_column_list('C', ['deleted', 'new','check_4_case_sensitiv','Blanks'])
+workbook.close()
+#------------------------------------------------------------------------------------------------
 
 print('--END--------------------------------------------------------------------------------------------')
 #EOF

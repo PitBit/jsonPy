@@ -19,7 +19,7 @@
     "Script": {
         "CompareJsonFile": {
             "description": "This script compare two different JSON Files, new and old file, with Matlab Model interface description",
-            "time": "2024-12-21 11:19:39.601728",
+            "time": "2024-12-21 15:32:04.899464",
             "newFile": "file1_lib.json",
             "oldFile": "file1.json"
         }
